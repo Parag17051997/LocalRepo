@@ -1,0 +1,32 @@
+name: DevOps-Parag_$(Rev:.r)
+trigger:
+  branches:
+    include:
+    - refs/heads/feature
+  paths: 
+    include: 
+      - .sh 
+stages:
+ - stage: stage_1
+   jobs:
+    - job: Pool_image
+      pool:
+       vmImage: $(var1)
+ -  stage: Stage_2
+    jobs:
+    - job: print_message
+      steps:
+       - script : echo ${{ parameters.print1 }}
+variables:
+name: var1
+  value: ubuntu-latest
+parameters:
+ - name: print1
+   displayName: print
+   default: Hi-Parag
+   type: string
+   values: 
+    - Hi-Parag
+    - Hi-Raj
+    - Hi-ayus
+    - Hi-yog
